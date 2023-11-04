@@ -8,38 +8,62 @@
 # • Uma função/método para testar se o objetivo desejado foi alcançado ou não.
 
 from services.RobotActions import RobotActions
+from collections import deque
 
 class RobotVacuumCleaner(RobotActions):
     
     staticEnvironment = [
-        {"Location": "A", "Status": "Clean", "index": 0},{"Location": "B", "Status": "Dirty", "index": 1}, {"Location": "C", "Status": "Clean", "index": 2}, {"Location": "D", "Status": "Dirty", "index": 3},
-        {"Location": "A", "Status": "Clean", "index": 4},{"Location": "B", "Status": "Dirty", "index": 5}, {"Location": "C", "Status": "Clean", "index": 6}, {"Location": "D", "Status": "Dirty", "index": 7},
-        {"Location": "A", "Status": "Clean", "index": 8},{"Location": "B", "Status": "Dirty", "index": 9}, {"Location": "C", "Status": "Clean", "index": 10}, {"Location": "D", "Status": "Dirty", "index":11},
-        {"Location": "A", "Status": "Clean", "index": 12},{"Location": "B", "Status": "Dirty", "index": 13}, {"Location": "C", "Status": "Clean", "index": 14}, {"Location": "D", "Status": "Dirty", "index": 15}
+        {"Location": "A", "Status": "Clean", "index": 0}, 
+        {"Location": "B", "Status": "Dirty", "index": 1}, 
+        {"Location": "C", "Status": "Clean", "index": 2}, 
+        {"Location": "D", "Status": "Dirty", "index": 3},
+        {"Location": "E", "Status": "Clean", "index": 4}, 
+        {"Location": "F", "Status": "Dirty", "index": 5}, 
+        {"Location": "G", "Status": "Clean", "index": 6}, 
+        {"Location": "H", "Status": "Dirty", "index": 7},
+        {"Location": "I", "Status": "Clean", "index": 8}, 
+        {"Location": "J", "Status": "Dirty", "index": 9}, 
+        {"Location": "K", "Status": "Clean", "index": 10}, 
+        {"Location": "L", "Status": "Dirty", "index": 11},
+        {"Location": "M", "Status": "Clean", "index": 12}, 
+        {"Location": "N", "Status": "Dirty", "index": 13}, 
+        {"Location": "O", "Status": "Clean", "index": 14}, 
+        {"Location": "P", "Status": "Dirty", "index": 15}
     ]
 
-    #currentLocation = int(staticEnvironment[0]['index'])
-    currentLocation = 15
+    currentLocation = int(staticEnvironment[0]['index'])
+    #currentLocation = 15
 
     energy = 100
+    capacity = 10
 
     def __init__(self):
         #self.showEnvironment()
         pass
 
     def showEnvironment(self):
-        # for square in self.staticEnvironment:
-        #     print(square)
-        #print(self.currentLocation)
-        pass
+        for line in self.staticEnvironment:
+            print(line)
     
     def actionToDo(self, action, direction = None):
         if action == "Move":
             print(f"Move to: {direction}")
-            self.currentLocation = self.move(direction, self.currentLocation)
-        else: 
-            pass
+            [self.energy, self.currentLocation] = self.move(direction, self.currentLocation, self.energy)
+        elif action == "Cleaner": 
+            [self.energy,self.staticEnvironment[self.currentLocation]["Status"]] = self.aspire(self.energy, self.staticEnvironment[self.currentLocation]) 
+            print(self.energy,self.staticEnvironment[self.currentLocation]["Status"])
+        elif action == "Home":
+            self.backHome(self.staticEnvironment, self.staticEnvironment[self.currentLocation])
 
 
 robot = RobotVacuumCleaner()
-robot.actionToDo("Move", "Right")
+robot.actionToDo("Move", "East")
+robot.actionToDo("Cleaner")
+robot.actionToDo("Move", "East")
+robot.actionToDo("Cleaner")
+robot.actionToDo("Move", "East")
+robot.actionToDo("Cleaner")
+robot.actionToDo("Move", "South")
+robot.actionToDo("Cleaner")
+print(robot.staticEnvironment[robot.currentLocation])
+
