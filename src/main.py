@@ -77,11 +77,39 @@ robot.actionToDo("Move", "East")
 robot.actionToDo("Cleaner")
 robot.actionToDo("Move", "East")
 robot.actionToDo("Cleaner")
+
 robot.actionToDo("Move", "South")
 robot.actionToDo("Cleaner")
 robot.actionToDo("Move", "South")
 robot.actionToDo("Cleaner")
 robot.actionToDo("Move", "South")
 robot.actionToDo("Cleaner")
+
+robot.actionToDo("Move", "West")
+robot.actionToDo("Cleaner")
+
+robot.actionToDo("Move", "North")
+robot.actionToDo("Cleaner")
+robot.actionToDo("Move", "North")
+robot.actionToDo("Cleaner")
+
+robot.actionToDo("Move", "West")
+robot.actionToDo("Cleaner")
+
+robot.actionToDo("Move", "South")
+robot.actionToDo("Cleaner")
+robot.actionToDo("Move", "South")
+robot.actionToDo("Cleaner")
+
+robot.actionToDo("Move", "West")
+robot.actionToDo("Cleaner")
+
+robot.actionToDo("Move", "North")
+robot.actionToDo("Cleaner")
+robot.actionToDo("Move", "North")
+robot.actionToDo("Cleaner")
+robot.actionToDo("Move", "North")
+robot.actionToDo("Cleaner")
+
 print(robot.staticEnvironment[robot.currentLocation["index"]])
 
