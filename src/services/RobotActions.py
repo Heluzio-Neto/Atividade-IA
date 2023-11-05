@@ -1,6 +1,5 @@
 # Uma função/método para determinar qual ação tomar. A decisão deve ser: Mover (em
 # que direção), aspirar sujeira ou voltar para casa.
-from collections import deque
 
 class RobotActions:
     def __init__(self):
@@ -47,10 +46,14 @@ class RobotActions:
             print("Invalid direction")
             return [energy, currentLocation]
 
-    def aspire(self, energy,currentLocation, capacity):
+    def aspire(self, energy, currentLocation, capacity, staticEnvironment):
         status = currentLocation["Status"]
         if status == "Dirty" and energy > 0 and capacity > 0:
             return [energy - 1, "Clean", capacity - 1]
+        elif capacity == 0 and energy > 0:
+            [s, p, c, energy_final] = self.backHome(staticEnvironment,currentLocation, energy)
+            print("Capacity already full")
+            return [energy_final, status, capacity]
         else: 
             print("Do not cleaner, localization already cleaned")
             return [energy, status, capacity]

@@ -33,7 +33,7 @@ class RobotVacuumCleaner(RobotActions):
     currentLocation = staticEnvironment[0]
 
     energy = 100
-    capacity = 10
+    capacity = 0
 
     def __init__(self):
         #self.showEnvironment()
@@ -54,7 +54,7 @@ class RobotVacuumCleaner(RobotActions):
             print("Actual location: {}".format(self.currentLocation['Location']))
             print("Actual capacity: {}".format(self.capacity))
 
-            [self.energy, self.staticEnvironment[self.currentLocation['index']]["Status"], self.capacity] = self.aspire(self.energy, self.staticEnvironment[self.currentLocation["index"]], self.capacity) 
+            [self.energy, self.staticEnvironment[self.currentLocation['index']]["Status"], self.capacity] = self.aspire(self.energy, self.staticEnvironment[self.currentLocation["index"]], self.capacity, self.staticEnvironment) 
 
         elif action == "Home":
             [status, path, self.currentLocation, self.energy] =self.backHome(self.staticEnvironment, self.currentLocation, self.energy)
@@ -67,8 +67,8 @@ class RobotVacuumCleaner(RobotActions):
             print("Status goal: {}".format(statusGoal))
 
 robot = RobotVacuumCleaner()
-# robot.actionToDo("Move", "East")
-# robot.actionToDo("Cleaner")
+robot.actionToDo("Move", "East")
+robot.actionToDo("Cleaner")
 # robot.actionToDo("Move", "East")
 # robot.actionToDo("Cleaner")
 # robot.actionToDo("Move", "East")
@@ -110,4 +110,4 @@ robot = RobotVacuumCleaner()
 # print(robot.staticEnvironment[robot.currentLocation["index"]])
 
 # robot.actionToDo("Goal")
-robot.actionToDo("Home")
+# robot.actionToDo("Home")
