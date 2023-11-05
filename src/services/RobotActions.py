@@ -7,37 +7,41 @@ class RobotActions:
         pass
     #Change to Cardinal points
     def move(self, direction, currentLocation, energy):
-
+        print(currentLocation)
         if direction in ["East","east"]:
             if currentLocation['Location'] not in ["D","H", "L", "P"] and energy > 0:
-                print(f"Moved to {currentLocation + 1}")
-                return [energy - 1, currentLocation + 1]
+                print(f"Moved to {currentLocation['index'] + 1}")
+                index = currentLocation['index'] + 1
+                return [energy - 1, index]
             else:
                 print(f"Do not move to: {currentLocation + 1}")
                 return [energy, currentLocation]
             
         elif direction in ["West","west"]:
             if currentLocation not in ["A", "E", "I", "M"] and energy > 0:
-                print(f"Moved to {currentLocation - 1}")
-                return [energy - 1, currentLocation - 1]
+                print(f"Moved to {currentLocation['index'] - 1}")
+                index = currentLocation['index'] - 1
+                return [energy - 1, index]
             else:
-                print(f"Do not move to: {currentLocation + 1}")
+                print(f"Do not move to: {currentLocation['index'] - 1}")
                 return [energy, currentLocation]
             
         elif direction in ["North", "north"]:
             if currentLocation not in ["A", "B", "C", "D"] and energy > 0:
-                print(f"Moved to {currentLocation - 4}")
-                return [energy - 1, currentLocation - 4]
+                print(f"Moved to {currentLocation['index'] - 4}")
+                index = currentLocation['index'] - 4
+                return [energy - 1, index]
             else:
-                print(f"Do not move to: {currentLocation + 1}")
+                print(f"Do not move to: {index}")
                 return [energy, currentLocation]
          
         elif direction in ["South", "south"]:
             if currentLocation not in ["M", "N", "O", "P"] and energy > 0:
-                print(f"Moved to {currentLocation + 4}")
-                return [energy - 1, currentLocation + 4]
+                print(f"Moved to {currentLocation['index'] + 4}")
+                index = currentLocation['index'] + 4
+                return [energy - 1, index]
             else:
-                print(f"Do not move to: {currentLocation + 1}")
+                print(f"Do not move to: {currentLocation['index'] + 4}")
                 return [energy, currentLocation]
         
         else:
