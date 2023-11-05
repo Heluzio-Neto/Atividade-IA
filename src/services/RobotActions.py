@@ -7,7 +7,6 @@ class RobotActions:
         pass
     #Change to Cardinal points
     def move(self, direction, currentLocation, energy):
-        print(currentLocation)
         if direction in ["East","east"]:
             if currentLocation['Location'] not in ["D","H", "L", "P"] and energy > 0:
                 print(f"Moved to {currentLocation['index'] + 1}")
@@ -56,47 +55,113 @@ class RobotActions:
             print("Do not cleaner, localization already cleaned")
             return [energy, status, capacity]
         
-    def backHome(self, staticEnvironment, currentLocation):
-        # Construa um grafo a partir dos dados
-        graph = {}
-        for item in staticEnvironment:
-            location = item["Location"]
-            if location == "A":
-                continue
-            if location not in graph:
-                graph[location] = []
-            graph[location].append(item["index"])
+    def backHome(self, staticEnvironment, currentLocation, energy):
+        print("Inital location: {}".format(currentLocation["Location"]))
 
-        # Exemplo: encontrar a melhor rota de D para A
-        start_location = currentLocation['Location'] # O índice de "D" é 3
-        end_location = 0  # O índice de "A" é 0
-        shortest_path = self.find_shortest_path(graph, start_location, end_location)
+        fourth_line = ["M", "N", "O", "P"]
+        third_line = ["I", "J", "K", "L"]
+        second_line = ["E", "F", "G", "H"]
+        first_line = ["A", "B", "C", "D"]
 
-        if shortest_path:
-            print("Melhor rota de {} para {}: ".format(staticEnvironment[start_location]["Location"], staticEnvironment[end_location]["Location"]))
-            for index in shortest_path:
-                print(f"Location: {staticEnvironment[index]['Location']} - Status: {staticEnvironment[index]['Status']}")
-        else:
-            print(f"Não foi possível encontrar uma rota de {currentLocation['Location']} para {staticEnvironment[end_location]['Location']}.")
+        path = []
+        energy_local = None
+        
 
-    @staticmethod
-    def find_shortest_path(graph, start, end):
-        visited = []
-        queue = deque([(start, [])])
-
-        while queue:
-            node, path = queue.popleft()
-            if node == end:
-                return path + [node]
+        # If the current location is in the Fourth line
+        if currentLocation['Location'] in fourth_line:
+            if currentLocation['Location'] != "M":
+                for i in range(0, 3):
+                    [en, index_actual] = self.move("North", currentLocation, energy)
+                    path.append(staticEnvironment[index_actual]['Location'])
+                    currentLocation = staticEnvironment[index_actual]
+                valueToFor = self.verifyQttToHome(first_line, currentLocation['Location'])
+                for i in range(0, valueToFor):
+                    [en, index_actual] = self.move("West", currentLocation, energy)
+                    path.append(staticEnvironment[index_actual]['Location'])
+                    currentLocation = staticEnvironment[index_actual]       
+                    energy_local = energy - (len(path))  
+                return ["Back to Home Successfully", path, currentLocation, energy_local] 
             
-            if node not in visited:
-                visited.append(node)
-                for neighbor in graph.get(node, []):
-                    if neighbor not in visited:
-                        queue.append((neighbor, path + [node]))
+            elif currentLocation['Location'] == "M":
+                for i in range(0, 3):
+                    [en, index_actual] = self.move("North", currentLocation, energy)
+                    path.append(staticEnvironment[index_actual]['Location'])
+                    currentLocation = staticEnvironment[index_actual]
+                    energy_local = energy - (len(path))  
+                return ["Back to Home Successfully", path, currentLocation, energy_local] 
+        
+        # If the current location is in the Third line
+        if currentLocation['Location'] in third_line:
+            if currentLocation['Location'] != "I":
+                for i in range(0, 2):
+                    [en, index_actual] = self.move("North", currentLocation, energy)
+                    path.append(staticEnvironment[index_actual]['Location'])
+                    currentLocation = staticEnvironment[index_actual]
+                valueToFor = self.verifyQttToHome(first_line, currentLocation['Location'])
+                for i in range(0, valueToFor):
+                    [en, index_actual] = self.move("West", currentLocation, energy)
+                    path.append(staticEnvironment[index_actual]['Location'])
+                    currentLocation = staticEnvironment[index_actual]       
+                    energy_local = energy - (len(path))         
+                return ["Back to Home Successfully", path, currentLocation, energy_local] 
+            
+            elif currentLocation['Location'] == "I":
+                for i in range(0, 2):
+                    [en, index_actual] = self.move("North", currentLocation, energy)
+                    path.append(staticEnvironment[index_actual]['Location'])
+                    currentLocation = staticEnvironment[index_actual]
+                    energy_local = energy - (len(path))  
+                return ["Back to Home Successfully", path, currentLocation, energy_local] 
+        
+        # If the current location is in the Second line
+        if currentLocation['Location'] in second_line:
+            if currentLocation['Location'] != "E":
+                for i in range(0, 1):
+                    [en, index_actual] = self.move("North", currentLocation, energy)
+                    path.append(staticEnvironment[index_actual]['Location'])
+                    currentLocation = staticEnvironment[index_actual]
+                valueToFor = self.verifyQttToHome(first_line, currentLocation['Location'])
+                for i in range(0, valueToFor):
+                    [en, index_actual] = self.move("West", currentLocation, energy)
+                    path.append(staticEnvironment[index_actual]['Location'])
+                    currentLocation = staticEnvironment[index_actual]       
+                    energy_local = energy - (len(path))         
+                return ["Back to Home Successfully", path, currentLocation, energy_local] 
+            
+            elif currentLocation['Location'] == "E":
+                for i in range(0, 1):
+                    [en, index_actual] = self.move("North", currentLocation, energy)
+                    path.append(staticEnvironment[index_actual]['Location'])
+                    currentLocation = staticEnvironment[index_actual]
+                    energy_local = energy - (len(path))  
+                return ["Back to Home Successfully", path, currentLocation, energy_local] 
+
+        # If the current location is in the First line
+        if currentLocation['Location'] in first_line:
+            if currentLocation['Location'] != "A":
+                valueToFor = self.verifyQttToHome(first_line, currentLocation['Location'])
+                for i in range(0, valueToFor):
+                    [en, index_actual] = self.move("West", currentLocation, energy)
+                    path.append(staticEnvironment[index_actual]['Location'])
+                    currentLocation = staticEnvironment[index_actual]       
+                    energy_local = energy - (len(path))         
+                return ["Back to Home Successfully", path, currentLocation, energy_local] 
+            
+            elif currentLocation['Location'] == "A":
+                path = []
+                energy_local = energy
+                return ["Already in Home", path, currentLocation, energy_local]             
+        else:    
+            pass
+    
+    @staticmethod
+    def verifyQttToHome(line_values, location_actual):
+        for index, v in enumerate(line_values):
+            if location_actual == v:
+                return index
 
     def verifyGoal(self, staticEnvironment): 
         for item in staticEnvironment:
             if item["Status"] == "Dirty":
-                return True
+                return "Fail to clean"
         return "Objective successfully achieved"

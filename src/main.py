@@ -48,64 +48,66 @@ class RobotVacuumCleaner(RobotActions):
             print(f"Move to: {direction}")
             [self.energy, new_index] = self.move(direction, self.currentLocation, self.energy)
             self.currentLocation = self.staticEnvironment[new_index]
+
         elif action == "Cleaner": 
             print("Actual energy: {}".format(self.energy))
-            print("Actual location: {}".format(self.currentLocation['index']))
+            print("Actual location: {}".format(self.currentLocation['Location']))
             print("Actual capacity: {}".format(self.capacity))
 
             [self.energy, self.staticEnvironment[self.currentLocation['index']]["Status"], self.capacity] = self.aspire(self.energy, self.staticEnvironment[self.currentLocation["index"]], self.capacity) 
 
         elif action == "Home":
-            self.backHome(self.staticEnvironment, self.staticEnvironment[self.currentLocation])
+            [status, path, self.currentLocation, self.energy] =self.backHome(self.staticEnvironment, self.currentLocation, self.energy)
+            print("Status: {}".format(status))
+            print("Path to home: {}".format(path))
+            print("Energy final: {}".format(self.energy))
 
         elif action == "Goal":
             statusGoal = self.verifyGoal(self.staticEnvironment)
             print("Status goal: {}".format(statusGoal))
 
 robot = RobotVacuumCleaner()
-robot.actionToDo("Move", "East")
-robot.actionToDo("Cleaner")
-robot.actionToDo("Move", "East")
-robot.actionToDo("Cleaner")
-robot.actionToDo("Move", "East")
-robot.actionToDo("Cleaner")
+# robot.actionToDo("Move", "East")
+# robot.actionToDo("Cleaner")
+# robot.actionToDo("Move", "East")
+# robot.actionToDo("Cleaner")
+# robot.actionToDo("Move", "East")
+# robot.actionToDo("Cleaner")
 
-robot.actionToDo("Move", "South")
-robot.actionToDo("Cleaner")
-robot.actionToDo("Move", "South")
-robot.actionToDo("Cleaner")
-robot.actionToDo("Move", "South")
-robot.actionToDo("Cleaner")
+# robot.actionToDo("Move", "South")
+# robot.actionToDo("Cleaner")
+# robot.actionToDo("Move", "South")
+# robot.actionToDo("Cleaner")
+# robot.actionToDo("Move", "South")
+# robot.actionToDo("Cleaner")
 
-robot.actionToDo("Move", "West")
-robot.actionToDo("Cleaner")
+# robot.actionToDo("Move", "West")
+# robot.actionToDo("Cleaner")
 
-robot.actionToDo("Move", "North")
-robot.actionToDo("Cleaner")
-robot.actionToDo("Move", "North")
-robot.actionToDo("Cleaner")
+# robot.actionToDo("Move", "North")
+# robot.actionToDo("Cleaner")
+# robot.actionToDo("Move", "North")
+# robot.actionToDo("Cleaner")
 
-robot.actionToDo("Move", "West")
-robot.actionToDo("Cleaner")
+# robot.actionToDo("Move", "West")
+# robot.actionToDo("Cleaner")
 
-robot.actionToDo("Move", "South")
-robot.actionToDo("Cleaner")
-robot.actionToDo("Move", "South")
-robot.actionToDo("Cleaner")
+# robot.actionToDo("Move", "South")
+# robot.actionToDo("Cleaner")
+# robot.actionToDo("Move", "South")
+# robot.actionToDo("Cleaner")
 
-robot.actionToDo("Move", "West")
-robot.actionToDo("Cleaner")
+# robot.actionToDo("Move", "West")
+# robot.actionToDo("Cleaner")
 
-robot.actionToDo("Move", "North")
-robot.actionToDo("Cleaner")
-robot.actionToDo("Move", "North")
-robot.actionToDo("Cleaner")
-robot.actionToDo("Move", "North")
-robot.actionToDo("Cleaner")
+# robot.actionToDo("Move", "North")
+# robot.actionToDo("Cleaner")
+# robot.actionToDo("Move", "North")
+# robot.actionToDo("Cleaner")
+# robot.actionToDo("Move", "North")
+# robot.actionToDo("Cleaner")
 
-print(robot.staticEnvironment[robot.currentLocation["index"]])
+# print(robot.staticEnvironment[robot.currentLocation["index"]])
 
-robot.actionToDo("Goal")
-
-
-
+# robot.actionToDo("Goal")
+robot.actionToDo("Home")
