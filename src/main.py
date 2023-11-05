@@ -33,7 +33,7 @@ class RobotVacuumCleaner(RobotActions):
     currentLocation = staticEnvironment[0]
 
     energy = 100
-    capacity = 0
+    capacity = 10
 
     def __init__(self):
         #self.showEnvironment()
