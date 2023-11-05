@@ -94,6 +94,9 @@ class RobotActions:
                 for neighbor in graph.get(node, []):
                     if neighbor not in visited:
                         queue.append((neighbor, path + [node]))
-                    
-    def verifyHandbag(self):
-        pass
+
+    def verifyGoal(self, staticEnvironment): 
+        for item in staticEnvironment:
+            if item["Status"] == "Dirty":
+                return True
+        return "Objective successfully achieved"

@@ -5,10 +5,9 @@
 # • Uma função/método para determinar em qual direção seguir.
 # • Uma função/método para identificar a rota e navegar de volta para casa a partir da
 # localização atual.
-# • Uma função/método para testar se o objetivo desejado foi alcançado ou não.
+# • Uma função/método para testar se o objetivo desejado foi alcançado ou não. 
 
 from services.RobotActions import RobotActions
-from collections import deque
 
 class RobotVacuumCleaner(RobotActions):
     
@@ -58,17 +57,10 @@ class RobotVacuumCleaner(RobotActions):
 
         elif action == "Home":
             self.backHome(self.staticEnvironment, self.staticEnvironment[self.currentLocation])
-    
-    def find_location(self, desired_location):
-        found_dict = None
 
-        for item in self.staticEnvironment:
-            if item["Location"] == desired_location:
-                found_dict = item
-                break
-
-        return found_dict
-
+        elif action == "Goal":
+            statusGoal = self.verifyGoal(self.staticEnvironment)
+            print("Status goal: {}".format(statusGoal))
 
 robot = RobotVacuumCleaner()
 robot.actionToDo("Move", "East")
@@ -112,4 +104,8 @@ robot.actionToDo("Move", "North")
 robot.actionToDo("Cleaner")
 
 print(robot.staticEnvironment[robot.currentLocation["index"]])
+
+robot.actionToDo("Goal")
+
+
 
