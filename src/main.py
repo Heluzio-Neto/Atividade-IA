@@ -31,8 +31,7 @@ class RobotVacuumCleaner(RobotActions):
         {"Location": "P", "Status": "Dirty", "index": 15}
     ]
 
-    currentLocation = int(staticEnvironment[0]['index'])
-    #currentLocation = 15
+    currentLocation = staticEnvironment[0]
 
     energy = 100
     capacity = 10
@@ -50,13 +49,24 @@ class RobotVacuumCleaner(RobotActions):
             print(f"Move to: {direction}")
             [self.energy, self.currentLocation] = self.move(direction, self.currentLocation, self.energy)
         elif action == "Cleaner": 
-            [self.energy,self.staticEnvironment[self.currentLocation]["Status"]] = self.aspire(self.energy, self.staticEnvironment[self.currentLocation]) 
+            [self.energy,self.staticEnvironment[self.currentLocation]["Status"], self.capacity] = self.aspire(self.energy, self.staticEnvironment[self.currentLocation], self.capacity) 
             print(self.energy,self.staticEnvironment[self.currentLocation]["Status"])
         elif action == "Home":
             self.backHome(self.staticEnvironment, self.staticEnvironment[self.currentLocation])
+    
+    def find_location(self, desired_location):
+        found_dict = None
+
+        for item in self.staticEnvironment:
+            if item["Location"] == desired_location:
+                found_dict = item
+                break
+
+        return found_dict
 
 
 robot = RobotVacuumCleaner()
+robot.actionToDo("Home")
 robot.actionToDo("Move", "East")
 robot.actionToDo("Cleaner")
 robot.actionToDo("Move", "East")
