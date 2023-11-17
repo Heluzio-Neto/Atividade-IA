@@ -24,10 +24,10 @@
 
 10. Comente sobre uma área de aplicação da IA na indústria automobilística.
     
-    _Na busca de reduzir mais os custos, melhorar a eficiência e a qualidade da produção e também atender às regulamentações ambientais. A industria Automotiva está recorrendo à Inteligencia Artificial.
+     Na busca de reduzir mais os custos, melhorar a eficiência e a qualidade da produção e também atender às regulamentações ambientais. A industria Automotiva está recorrendo à Inteligencia Artificial.
          
       Segurança: O desenvolvimento de sistemas de direção Autônoma, que utilizam Machine Learning para processar dados de sensores e câmeras, identificando e evitando riscos na pista.
-      Sistemas avançados de assistência ao Motorista ou ADAS (Advanced Driver Assistance Systems): É um sistema que se utiliza o Machine Learning para fornecer informações ao motorista sobre o carro, a estrada e outros dados relevantes, buscando auxiliar o motorista na       tomada de decisões_
+      Sistemas avançados de assistência ao Motorista ou ADAS (Advanced Driver Assistance Systems): É um sistema que se utiliza o Machine Learning para fornecer informações ao motorista sobre o carro, a estrada e outros dados relevantes, buscando auxiliar o motorista na       tomada de decisões
 
 11. Com base no tutorial disponível em: [Hands-on: classificação com KNN e K-means](https://ateliware.com/blog/classificacao-knn-k-means), implemente uma solução para o dataset Iris.
 
